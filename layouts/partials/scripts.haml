@@ -1,0 +1,16 @@
+%script(language="javascript" type="text/javascript" src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+:javascript
+  window.jQuery || document.write('<script src="/javascripts/jquery-1.7.1.min.js"><\/script>')
+%script(language="javascript" type="text/javascript"){src: versioned_script('ui')}
+-#
+  Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+  mathiasbynens.be/notes/async-analytics-snippet 
+-#:javascript
+  if (jQuery.cookie('cc_cookie_decline') == "cc_cookie_decline") {
+    // do nothing 
+  } else {
+    var _gaq=[['_setAccount','UA-29442314-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  }

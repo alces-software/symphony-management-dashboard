@@ -1,0 +1,44 @@
+---
+title: Welcome
+---
+.grid_12
+  %img(style='float: left;' alt="Alces Software Limited." src="/images/logo/75px.png")
+  %h1
+    Management dashboard
+  %p(style='font-size: 140%; margin-bottom: 0;')
+    Welcome to the <i>Alces Symphony</i> management dashboard running on
+    <b>your cluster</b>.
+  %p
+    This service provides access to the open source
+    software services that are preconfigured and delivered as part of
+    the Alces Software HPC Stack For Linux operating on this system.
+  .clearfix
+    .figureContainer
+      .figures
+        %figure
+          %img(src="http://symphony-monitor.compute.estate/ganglia/graph.php?g=load_report&z=medium")
+          %figcaption
+            Load statistics across your cluster during the last hour.
+        %figure
+          %img(src="http://symphony-monitor.compute.estate/ganglia/graph.php?g=cpu_report&z=medium")
+          %figcaption
+            CPU usage across your cluster during the last hour.
+.grid_12
+  %h2 Monitoring
+  %ul
+    %li
+      %a(href='http://symphony-monitor.compute.estate/ganglia/') Ganglia
+      &mdash; performance monitoring
+    %li
+      %a(href='http://symphony-monitor.compute.estate/nagios/') Nagios
+      &mdash; availability monitoring
+  %h2 Provisioning
+  %ul
+    %li
+      %a(href='/cobbler_web/') Cobbler
+      &mdash; deployment
+  %h2 User management
+  %ul
+    %li
+      %a(href='http://directory1.compute.estate') IPA
+      &mdash; directory server

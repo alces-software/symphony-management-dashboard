@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+
+# A few helpful tips about the Rules file:
+#
+# * The string given to #compile and #route are matching patterns for
+#   identifiers--not for paths. Therefore, you can’t match on extension.
+#
+# * The order of rules is important: for each item, only the first matching
+#   rule is applied.
+#
+# * Item identifiers start and end with a slash (e.g. “/about/” for the file
+#   “content/about.html”). To select all children, grandchildren, … of an
+#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
+#   because “*” matches zero or more characters.
+
+compile '/assets/styles/*/' do
+  unless @item.identifier =~ %r(/copy/*|/assets/styles/(bourbon|adapt|partials)/*/)
+    filter :erb
+    case item[:extension].split('.').last
+    when 'scss'
+      filter :sass, syntax: :scss
+    end
+    filter :relativize_paths, :type => :css
+    filter :pie
+    filter :yui_compressor, :type => :css
+  end
+end
+
+compile '/assets/javascripts/*/' do
+  case item[:extension].split('.').last
+  when 'coffee'
+    filter :coffee
+  end
+  filter :uglify_js
+end
+
+compile '*' do
+  if item.binary?
+    # don’t filter binary items
+  elsif item[:extension] == 'htaccess'
+    filter :erb
+  else
+    case item[:extension].split('.').last
+    when 'md'
+      filter :erb
+      filter :kramdown
+    when 'haml'
+      filter :haml, { :format => :html5, :ugly => true }
+    when 'erb'
+      filter :erb
+    end
+    if item.identifier[0..5] != '/copy/'
+      layout "inners/#{item[:layout]}" if item[:layout]
+      layout 'default'
+    elsif item.identifier[-9..-1] == '/prelude/'
+      layout 'inners/prelude' if item[:title]
+    end
+    filter :rubypants
+    if item.identifier[0..5] != '/copy/' && item.identifier[7..14] != '/_error/'
+      filter :relativize_paths, :type => :html
+    end
+  end
+end
+
+# so that the /assets/javascripts/ items are copied to /javascripts/ folder
+route '/assets/javascripts/*/' do
+  item.identifier.sub(%r{^/assets/javascripts}, '/javascripts').chop + '.js'
+end
+
+# so that the /assets/javascripts/ items are copied to /javascripts/ folder
+route '/assets/images/*/' do
+  item.identifier.sub(%r{^/assets/images}, '/images').chop + '.' + item[:extension]
+end
+
+route %r(/copy/*|/assets/styles/(bourbon|adapt|partials)/*/) do
+end
+
+# so that the /assets/styles/ items are copied to /styles/ folder
+route '/assets/styles/*/' do
+  item.identifier.sub(%r{^/assets/styles}, '/styles').chop + '.css'
+end
+
+route '/static/*' do
+  # /static/foo.html/ → /foo.html
+  item.identifier[7..-2]
+end
+
+compile '/static/*' do
+end
+
+route '/htdocs/*' do
+  if item.binary?
+    # Write item with identifier /foo/ to /foo.ext
+    item.identifier[7..-1].chop + '.' + item[:extension]
+  elsif item[:extension] == 'htaccess'
+    item.identifier[7..-1] + '.htaccess'
+  else
+    # Write item with identifier /foo/ to /foo/index.html
+    item.identifier[7..-1] + 'index.html'
+  end
+end
+
+layout '*', :haml, { :format => :html5, :ugly => true }

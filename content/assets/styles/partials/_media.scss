@@ -1,0 +1,238 @@
+/*=============================================================================
+ * Copyright (C) 2007-2012 Stephen F. Norledge and Alces Software Ltd.
+ *
+ * This file is part of Alces Railsware, part of the Symphony suite.
+ *
+ * Alces Railsware is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *                                                                               
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this software.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Some rights reserved, see LICENSE.txt.
+ *===========================================================================*/
+@import '../bourbon/css3/transition';
+
+@mixin disable-transition {
+    .container_12, .grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12 {
+        /* disable transition from one-column (mobile) mode to 720px grid */
+        @include transition(none);
+    }
+}
+
+@media screen {
+    .container_12, .grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12 {
+        @include transition(width, .2s, linear);
+    }
+
+    @media (max-width: 740px) {
+        /*
+        body {
+            overflow-x: scroll !important;
+        }
+        */
+        #splash #bubbles .splashText h1 {
+            font-size: 48px !important;
+            line-height: 48px !important;
+            letter-spacing: -1px;
+        }
+
+        #cboxTitle {
+            max-width: 60% !important;
+        }
+
+        #main {
+            /* no longer needed
+            .ribbon-holder {
+                top: -140px !important;
+            }
+            */
+            .container_12 {
+                margin: 0 10px;
+
+                .promote {
+                    h1 {
+                        text-align: center;
+                    }
+                    .preludeImage, .preludeFigure {
+                        display: block !important;
+                        float: none !important;
+                    }
+                    .preludeFigure {
+                        width: auto !important;
+                    }
+                    .prelude {
+                        display: block !important;
+                        .attribution {
+                            left: 50%;
+                            right: auto !important;
+                        }
+                    }
+                    figure {
+                        max-width: 80% !important;
+                    }
+                    img, figure {
+                        float: none !important;
+                        display: block;
+                        margin: 0 auto !important;
+                    }
+                    .figureContainer {
+                        margin: 20px 0 !important;
+                    }
+                    p {
+                        display: block !important;
+                    }
+                }
+            }
+            
+            .splitter {
+                background: none !important;
+                .hr {
+                    display: block !important;
+                }
+            }
+        }
+
+        #footer {
+            #sitemap {
+                .col {
+                    margin-left: 3% !important;
+                    padding-right: 0 !important;
+                    max-width: 22% !important;
+                }
+            }
+            #footerMetadata {
+                .hr { display: block !important; }
+            }
+            .contacts {
+                clear: left;
+                float: left;
+                p { margin-left: 15px; }
+                text-align: left !important;
+            }
+            .standards {
+                padding: 0 !important;
+                float: right;
+                margin-right: 15px;
+            }
+            #copyright {
+                p {
+                    margin-bottom: 3px !important;
+                }
+                ul {
+                    margin-left: 10px !important;
+                }
+            }
+        }
+
+        #skipToContent {
+            padding-left: 5px !important;
+        }
+
+        #headerInner {
+            margin-top: 20px !important;
+
+            #logo {
+                padding-left: 5px !important;
+            }
+
+            nav {
+                ul {
+                    text-align: right;
+                    margin-top: -8px !important;
+                    li {
+                        padding-bottom: 0 !important;
+                        float: none !important;
+                        a {
+                            border-right: none !important;
+                        }
+                        &.selected {
+                            background: none !important;
+                        }
+                    }
+                }
+                padding-bottom: 24px;
+                #breadcrumbs {
+                    text-align: right;
+                }
+            }
+        }
+        #body {
+            background-attachment: scroll !important;
+        }
+        @import '../adapt/mobile';
+    }
+
+    @media (max-width: 480px) {
+        #splash #bubbles {
+            height: 240px !important;
+            .splashText {
+                bottom: 10px !important;
+                h1 {
+                    font-size: 32px !important;
+                    line-height: 36px !important;
+                    letter-spacing: 0 !important;
+                }
+            }
+        }
+    }
+
+    /* disable transition from 720px grid to one-column (mobile) mode and back*/
+    @media (max-width: 860px) {
+        @include disable-transition;
+    }
+
+    @media (min-width: 741px) and (max-width: 979px) {
+        #footer {
+            #sitemap {
+                .col {
+                    max-width: 8em !important;
+                }
+            }
+        }
+        #screenshots {
+            &.ppy-active {
+                width: 220px !important;
+                &.ppy-expanded {
+                    width: auto !important;
+                }
+            }
+        }
+        #screenshots.ppy-active {
+            max-width: 600px;
+            .ppy-stage {
+                max-width: 100%;
+            }
+            &.ppy-expanded {
+                .ppy-stage {
+                    height: 440px !important;
+                }
+            }
+        }
+        @import '../adapt/720';
+    }
+    @media (min-width: 980px) and (max-width: 1279px) {
+        #screenshots {
+            &.ppy-active {
+                width: 280px !important;
+                &.ppy-expanded {
+                    width: auto !important;
+                }
+            }
+        }
+        @import '../adapt/960';
+    }
+    @media (min-width: 1280px) and (max-width: 1599px) {
+        @import '../adapt/1200';
+    }
+    @media (min-width: 1600px) {
+        @import '../adapt/1560';
+    }
+}

@@ -1,0 +1,6 @@
+%h1= item[:title]
+.prelude
+  %div{class: item[:caption].nil? ? 'preludeImage' : 'preludeFigure' }
+    = figure(item[:figure], item[:figure_alt], caption: !item[:caption].nil?, attribution: item[:attribution])
+  .preludeText
+    = yield

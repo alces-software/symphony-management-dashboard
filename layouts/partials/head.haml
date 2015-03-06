@@ -1,0 +1,25 @@
+%meta{charset: 'utf-8'}
+-#
+  This is now dealt with by the site's .htaccess file
+  %meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+- unless @item[:description].nil?
+  %meta{name: 'description', content: @item[:description]}
+%meta{name: 'author', content: 'Alces Software Ltd'}
+-# prevent search engines from caching content; Google's cached
+-# version doesn't look right, don't see why any other search engines
+-# will either.
+%meta{name: 'robots', content: 'noarchive'}
+-# Mobile viewport optimized: h5bp.com/viewport
+-# h5bp 3.0 mandates no ', initial-scale=1' in the viewport content, to fix iOS bugs
+%meta{name: 'viewport', content: 'width=device-width'}
+-# Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons
+-# CSS: implied media="all"
+%link(rel="stylesheet" type="text/css" media="screen"){href: versioned_styles('alces')}
+-# More ideas for your <head> here: h5bp.com/docs/#head-Tips
+-# All JavaScript at the bottom, except for Modernizr.
+-# Modernizr enables HTML5 elements & feature detects.
+-# For optimal performance, use a custom Modernizr build: www.modernizr.com/download/
+%script(language="javascript" type="text/javascript"){src: versioned_script('respond.min')}
+%script(language="javascript" type="text/javascript"){src: versioned_script('modernizr.min')}
+%title #{@item[:title]} | Alces Software Ltd
+%base(target='_top')

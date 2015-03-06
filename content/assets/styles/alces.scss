@@ -1,0 +1,91 @@
+@import 'bourbon/bourbon';
+@import 'partials/colors';
+@import 'partials/fonts';
+@import 'partials/media';
+
+H1 {
+  font-family: 'Magra';
+  background-color: $prim;
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: normal;
+  margin: 0 0 0 200px;
+  height: 65px;
+  line-height: 65px;
+  font-size: 48px;
+  padding-left: 25px;
+}
+
+H2 {
+  font-family: 'Magra';
+  background-color: rgb(64,64,64);
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: normal;
+  margin-top: 0;
+  padding-left: 5px;
+}
+
+P, UL {
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: 'Quattrocento Sans';
+}
+
+FIGCAPTION {
+    font-family: 'DroidSans';
+    font-size: 12px;
+}
+
+A {
+    color: $prim_d2;
+}
+
+BODY {
+    padding-bottom: 60px;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: $prim_d2;
+    text-align: center;
+    border-top: 1px solid $prim_l2;
+    P {
+        font-size: 12px;
+        font-family: 'DroidSans';
+        color: white;
+    }
+}
+
+.figureContainer {
+    float: left;
+    position: relative;
+    left: 50%;
+    margin-bottom: 24px;
+}
+
+.figures {
+    float: left;
+    position: relative;
+    left: -50%;
+}
+
+FIGURE {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    float: left;
+
+    IMG {
+        max-width: 397px;
+    }
+
+    FIGCAPTION {
+        text-align: center;
+    }
+}

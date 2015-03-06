@@ -1,0 +1,42 @@
+-#
+  Copyright (C) 2007-2011 Stephen F. Norledge and Alces Software Ltd.
+
+  This file is part of Alces WWW.
+
+  All rights reserved, see LICENSE.txt.
+-#
+!!! 5
+-# paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+:erb
+  <!--[if lt IE 7]> <html class="no-js ie6 ie-lte9 ie-lte8 ie-lte7 ie-lte6" lang="<%= 'en' %>"> <![endif]-->
+  <!--[if IE 7]>    <html class="no-js ie7 ie-lte9 ie-lte8 ie-lte7" lang="<%= 'en' %>"> <![endif]-->
+  <!--[if IE 8]>    <html class="no-js ie8 ie-lte9 ie-lte8" lang="<%= 'en' %>"> <![endif]-->
+  <!--[if IE 9]>    <html class="no-js ie9 ie-lte9" lang="<%= 'en' %>"> <![endif]-->
+  <!--[if gt IE 9]><!-->
+  <html class="no-js" lang="<%= 'en' %>">
+  <!--<![endif]-->
+%head= render 'partials/head'
+%body(role='document'){body_attrs}
+  -# 
+    Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+    chromium.org/developers/how-tos/chrome-frame-getting-started
+  /[if lt IE 7]
+    .chromeframe
+      .ancient Sorry&hellip; Your browser is ancient!
+      .upgrade Please <a href="http://browsehappy.com/">upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to properly experience this site.
+  #container
+    #body
+      #main.contents
+        .container_12
+          = yield
+      = render 'partials/footer'
+  = render 'partials/scripts'
+:plain
+  </html>
+
+-# emacs Local Variables:
+-# emacs tab-width: 2; c-basic-offset: 2; indent-tabs-mode: nil
+-# emacs mode: haml
+-# emacs End:
+-# vim: tabstop=2 shiftwidth=2 expandtab
+-# vim: softtabstop=2

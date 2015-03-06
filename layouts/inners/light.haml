@@ -1,0 +1,18 @@
+-#
+  Copyright (C) 2007-2012 Stephen F. Norledge and Alces Software Ltd.
+
+  This file is part of Alces WWW.
+
+  All rights reserved, see LICENSE.txt.
+-#
+.lighten.clearfix
+  #go.grid_10.prefix_1.promote
+    = content_for(@item, :prelude) || render_copy('prelude')
+  .equalise
+    .grid_5.prefix_1.col
+      = content_for(@item, :main) || render_copy('main')
+    .grid_1.col.splitter
+      .hr
+        %hr
+    .grid_4.col
+      = content_for(@item, :info) || render_copy('info')

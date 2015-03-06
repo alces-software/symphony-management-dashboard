@@ -1,0 +1,5 @@
+.lighten.clearfix
+  #go.prefix_1.grid_10.promote
+    = content_for(@item, :prelude) || render_copy('prelude')
+  .prefix_1.grid_10
+    = content_for(@item, :main) || render_copy('main')
