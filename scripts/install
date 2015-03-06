@@ -1,0 +1,29 @@
+#!/bin/bash
+NAME=symphony-management-dashboard
+TREEISH=${TREEISH:-master}
+ZIPFILE_URL="https://github.com/alces-software/${NAME}/archive/${TREEISH}.tar.gz"
+PACKAGE_ROOT="/opt/${NAME}"
+TARBALL="/tmp/${NAME}.tar.gz"
+
+mkdir -p "${PACKAGE_ROOT}/htdocs"
+curl -L -o "${TARBALL}" "${ZIPFILE_URL}"
+cd "${PACKAGE_ROOT}/htdocs"
+tar -xvz --strip-components=2 -f "${TARBALL}" "${NAME}-${TREEISH}/build/"
+rm -f "${TARBALL}"
+
+cd /var/www
+rmdir html
+ln -s "${PACKAGE_ROOT}/htdocs" html
+
+cat <<EOF
+
+----------------------------------------------------------------------
+
+Installation of ${NAME} complete.
+
+You should edit the following file to replace the string 'your
+cluster' with the name of the cluster:
+
+${PACKAGE_ROOT}/htdocs/index.html
+
+EOF
